@@ -1,0 +1,15 @@
+# Name of the workflow
+name: test
+# This work flow is triggered when pull requests are opened or updated
+on: [pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter test test/unit_test.dart
+      - run: flutter test test/integration_test.dart
